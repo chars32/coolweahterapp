@@ -8,9 +8,10 @@ const useStyles = makeStyles({
     backgroundColor: "#848484",
     color: "white",
     padding: "10px",
-    width: "35%",
+    width: "40%",
     textAlign: "center",
     cursor: "pointer",
+    fontSize: "16px",
   },
   buttonLocation: {
     backgroundColor: "#848484",
