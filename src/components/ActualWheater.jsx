@@ -82,7 +82,7 @@ const ActualWheaterBox = ({
         display="flex"
         justifyContent="center"
         alignItems="center"
-        width="50%"
+        width="100%"
         flexGrow="0.05"
       >
         <Box component="p">Today </Box>
