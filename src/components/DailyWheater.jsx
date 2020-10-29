@@ -6,11 +6,11 @@ import HeaderLocation from "../components/HeaderLocation";
 import ActualWheaterBox from "../components/ActualWheater";
 // Data
 import data from "../data.json";
-
 //Actual Date
 const now = new Date().toUTCString().split(" ", 3).join(" ");
 
-const DailyWheater = () => {
+const DailyWheater = ({ lat, lon }) => {
+  console.log(lat, lon);
   return (
     <Box height="100%" display="flex" flexDirection="column">
       <HeaderLocation />
