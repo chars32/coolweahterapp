@@ -1,11 +1,13 @@
 import React from "react";
 //MaterialUI
 import { Box } from "@material-ui/core";
+//Components
+import HeaderLocation from "../components/HeaderLocation";
 
 const DailyWheater = () => {
   return (
     <Box height="100%" display="flex" flexDirection="column">
-      <h1>Estamos en dailyweahter</h1>
+      <HeaderLocation />
     </Box>
   );
 };
