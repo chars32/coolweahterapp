@@ -1,0 +1,43 @@
+{
+  "coord": {
+    "lon": -92.95,
+    "lat": 17.99
+  },
+  "weather": [
+    {
+      "id": 802,
+      "main": "Clouds",
+      "description": "scattered clouds",
+      "icon": "03d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 27.93,
+    "feels_like": 31.71,
+    "temp_min": 27.93,
+    "temp_max": 27.93,
+    "pressure": 1008,
+    "humidity": 82,
+    "sea_level": 1008,
+    "grnd_level": 1007
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 3.39,
+    "deg": 360
+  },
+  "clouds": {
+    "all": 25
+  },
+  "dt": 1603927673,
+  "sys": {
+    "country": "MX",
+    "sunrise": 1603886972,
+    "sunset": 1603928481
+  },
+  "timezone": -21600,
+  "id": 3514670,
+  "name": "Villahermosa",
+  "cod": 200
+}
