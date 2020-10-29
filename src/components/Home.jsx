@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 // Components
 import DailyWheater from "./DailyWheater";
+import StatsWeather from "./StatsWeather";
 
 const useStyles = makeStyles({
   home: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles({
 const Home = () => {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
-
+  // Getting latitud and longitude
   navigator.geolocation.getCurrentPosition((position) => {
     setLatitude(position.coords.latitude);
     setLongitude(position.coords.longitude);
@@ -25,7 +26,8 @@ const Home = () => {
 
   return (
     <Box className={styles.home} height="100%">
-      {latitude && longitude && <DailyWheater lat={latitude} lon={longitude} />}
+      <DailyWheater lat={latitude} lon={longitude} />
+      <StatsWeather />
     </Box>
   );
 };
