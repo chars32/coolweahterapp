@@ -1,18 +1,13 @@
 import React from "react";
 import { Box, makeStyles } from "@material-ui/core";
 import FiveDaysWeather from "./FiveDaysWeather";
-
-const useStyles = makeStyles({
-  main: {
-    backgroundColor: "#100E1D",
-  },
-});
+import HightlightsWeahter from "./HightlightsWeahter";
 
 const StatsWeather = () => {
-  const styles = useStyles();
   return (
-    <Box className={styles.main} height="100%">
+    <Box>
       <FiveDaysWeather />
+      <HightlightsWeahter />
     </Box>
   );
 };
