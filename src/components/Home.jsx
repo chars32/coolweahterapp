@@ -1,12 +1,24 @@
 // React
 import React, { useState } from "react";
 // MaterialUI
-import { Box } from "@material-ui/core";
+import { Box, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 // Components
 import DailyWheater from "./DailyWheater";
 import StatsWeather from "./StatsWeather";
 
+const useStyle = makeStyles({
+  mainupmd: {
+    display: "flex",
+  },
+});
+
 const Home = () => {
+  //Styles
+  const styles = useStyle();
+  // Theme and Mediaquery
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("lg"));
+
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
   // Getting latitud and longitude
@@ -16,7 +28,7 @@ const Home = () => {
   });
 
   return (
-    <Box height="100%">
+    <Box height="100%" className={matches && styles.mainupmd}>
       <DailyWheater lat={latitude} lon={longitude} />
       <StatsWeather />
     </Box>

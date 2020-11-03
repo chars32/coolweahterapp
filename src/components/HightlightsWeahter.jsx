@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, makeStyles } from "@material-ui/core";
+import { Box, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 
 const useStyles = makeStyles({
   main: {
@@ -10,6 +10,7 @@ const useStyles = makeStyles({
   mainBoxes: {
     display: "flex",
     flexDirection: "column",
+    alignItems: "center",
   },
   boxes: {
     backgroundColor: "#1E213A",
@@ -20,18 +21,50 @@ const useStyles = makeStyles({
     margin: "15px 0",
     justifyContent: "center",
     textAlign: "center",
+    width: "85%",
+  },
+  // mediaquerys
+  mainuplg: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    // boxSizing: "border-box",
+    height: "70%",
+    color: "white",
+    backgroundColor: "#100E1D",
+  },
+
+  mainuplg_p: {
+    width: "80%",
+  },
+
+  mainBoxesUpLg: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+  },
+
+  boxesUpLg: {
+    width: "45%",
   },
 });
 
 const HightlightsWeahter = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("lg"));
   const styles = useStyles();
   return (
-    <Box className={styles.main}>
-      <Box component="p" fontSize="24px" p={3}>
+    <Box className={`${matches ? styles.mainuplg : styles.main}`}>
+      <Box
+        className={matches && styles.mainuplg_p}
+        component="p"
+        fontSize="24px"
+        p={3}
+      >
         Today's HightLights
       </Box>
-      <Box className={styles.mainBoxes} p={3}>
-        <Box className={styles.boxes}>
+      <Box className={matches ? styles.mainBoxesUpLg : styles.mainBoxes} p={3}>
+        <Box className={`${styles.boxes} ${matches && styles.boxesUpLg}`}>
           <Box component="span">Wind status</Box>
           <Box>
             <Box component="span" fontSize="64px">
@@ -43,7 +76,7 @@ const HightlightsWeahter = () => {
             <Box component="p">algo de video</Box>
           </Box>
         </Box>
-        <Box className={styles.boxes}>
+        <Box className={`${styles.boxes} ${matches && styles.boxesUpLg}`}>
           <Box component="span">Humidity</Box>
           <Box>
             <Box component="span" fontSize="64px">
@@ -55,7 +88,7 @@ const HightlightsWeahter = () => {
             <Box component="p">una barra progreso</Box>
           </Box>
         </Box>
-        <Box className={styles.boxes}>
+        <Box className={`${styles.boxes} ${matches && styles.boxesUpLg}`}>
           <Box component="span">Visibility</Box>
           <Box>
             <Box component="span" fontSize="64px">
@@ -66,7 +99,7 @@ const HightlightsWeahter = () => {
             </Box>
           </Box>
         </Box>
-        <Box className={styles.boxes}>
+        <Box className={`${styles.boxes} ${matches && styles.boxesUpLg}`}>
           <Box component="span">Air Pressure</Box>
           <Box>
             <Box component="span" fontSize="64px">
