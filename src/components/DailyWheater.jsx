@@ -5,7 +5,7 @@ import { Box, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 import HeaderLocation from "../components/HeaderLocation";
 import ActualWheaterBox from "../components/ActualWheater";
 // Data
-import data from "../data.json";
+// import data from "../data.json";
 
 const useStyles = makeStyles({
   main: {
@@ -22,9 +22,8 @@ const useStyles = makeStyles({
 //Actual Date
 const now = new Date().toUTCString().split(" ", 3).join(" ");
 
-const DailyWheater = ({ lat, lon }) => {
+const DailyWheater = ({ data }) => {
   const styles = useStyles();
-  console.log(lat, lon);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
   return (

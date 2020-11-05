@@ -5,6 +5,8 @@ import { Box, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 // Components
 import DailyWheater from "./DailyWheater";
 import StatsWeather from "./StatsWeather";
+// Data
+import data from "../data.json";
 
 const useStyle = makeStyles({
   mainupmd: {
@@ -29,8 +31,8 @@ const Home = () => {
 
   return (
     <Box height="100%" className={matches && styles.mainupmd}>
-      <DailyWheater lat={latitude} lon={longitude} />
-      <StatsWeather />
+      <DailyWheater data={data} />
+      <StatsWeather data={data} />
     </Box>
   );
 };

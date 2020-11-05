@@ -49,7 +49,12 @@ const useStyles = makeStyles({
   },
 });
 
-const HightlightsWeahter = () => {
+const HightlightsWeahter = ({
+  windSpeed,
+  humidty,
+  visibility,
+  airPreassure,
+}) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
   const styles = useStyles();
@@ -68,10 +73,10 @@ const HightlightsWeahter = () => {
           <Box component="span">Wind status</Box>
           <Box>
             <Box component="span" fontSize="64px">
-              7
+              {Math.round(windSpeed)}
             </Box>
             <Box component="span" fontSize="36px">
-              mph
+              km/h
             </Box>
             <Box component="p">algo de video</Box>
           </Box>
@@ -80,7 +85,7 @@ const HightlightsWeahter = () => {
           <Box component="span">Humidity</Box>
           <Box>
             <Box component="span" fontSize="64px">
-              84
+              {humidty}
             </Box>
             <Box component="span" fontSize="36px">
               %
@@ -92,10 +97,10 @@ const HightlightsWeahter = () => {
           <Box component="span">Visibility</Box>
           <Box>
             <Box component="span" fontSize="64px">
-              6,4
+              {Math.round(visibility / 1000)}
             </Box>
             <Box component="span" fontSize="36px">
-              miles
+              kms
             </Box>
           </Box>
         </Box>
@@ -103,7 +108,7 @@ const HightlightsWeahter = () => {
           <Box component="span">Air Pressure</Box>
           <Box>
             <Box component="span" fontSize="64px">
-              998
+              {airPreassure}
             </Box>
             <Box component="span" fontSize="36px">
               mb

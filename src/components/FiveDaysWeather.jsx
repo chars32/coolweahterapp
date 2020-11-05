@@ -1,7 +1,32 @@
 import React from "react";
 import { Box, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 
-import clear from "../assets/img/Clear.png";
+import datfivedays from "../dataDays.json";
+
+const mainData = datfivedays.list; // esta data esta hardocdeada
+const arrayFinish = [];
+
+const getDateForecast = (data) => {
+  // Variables de apoyo
+  const dataDatesForecast = [];
+
+  // Mapear para obtner valores y luego pusheamos los valores a dataDatesForecast sin que se repitan
+  data.map((item) => dataDatesForecast.push(item.dt_txt.slice(0, 11)));
+  const uniqueDates = [...new Set(dataDatesForecast)];
+
+  // Comparamos cada valor de los uniqueDates con el valor sliceado dt.txt de mainData
+  uniqueDates.forEach((c) => {
+    let helperArray = [];
+    mainData.forEach((d) => {
+      if (c === d.dt_txt.slice(0, 11)) {
+        helperArray.push(d);
+      }
+    });
+    arrayFinish.push(helperArray);
+  });
+};
+
+getDateForecast(mainData);
 
 const useStyles = makeStyles({
   main: {
@@ -79,68 +104,88 @@ const FiveDaysWeather = () => {
           <Box component="p">Tomorrow</Box>
           <Box
             component="img"
-            src={clear}
-            width={matches ? "55%" : "150px"}
+            src={`http://openweathermap.org/img/wn/${arrayFinish[0][0].weather[0].icon}@2x.png`}
+            width={matches ? "55%" : "75%"}
           ></Box>
           <Box className={styles.boxTempWeather}>
-            <Box component="span">16c</Box>
-            <Box component="span">11c</Box>
+            <Box component="span">
+              {Math.round(arrayFinish[0][0].main.temp_max)}c
+            </Box>
+            <Box component="span">
+              {Math.round(arrayFinish[0][1].main.temp_max)}c
+            </Box>
           </Box>
         </Box>
         <Box
           className={`${matches ? styles.boxWeatherUpMd : styles.boxWeather}`}
         >
-          <Box component="p">Tomorrow</Box>
+          <Box component="p">{arrayFinish[1][0].dt_txt.slice(0, 11)}</Box>
           <Box
             component="img"
-            src={clear}
-            width={matches ? "55%" : "150px"}
+            src={`http://openweathermap.org/img/wn/${arrayFinish[1][0].weather[0].icon}@2x.png`}
+            width={matches ? "55%" : "75%"}
           ></Box>
           <Box className={styles.boxTempWeather}>
-            <Box component="span">16c</Box>
-            <Box component="span">11c</Box>
+            <Box component="span">
+              {Math.round(arrayFinish[1][0].main.temp_max)}c
+            </Box>
+            <Box component="span">
+              {Math.round(arrayFinish[1][1].main.temp_max)}c
+            </Box>
           </Box>
         </Box>
         <Box
           className={`${matches ? styles.boxWeatherUpMd : styles.boxWeather}`}
         >
-          <Box component="p">Tomorrow</Box>
+          <Box component="p">{arrayFinish[2][0].dt_txt.slice(0, 11)}</Box>
           <Box
             component="img"
-            src={clear}
-            width={matches ? "55%" : "150px"}
+            src={`http://openweathermap.org/img/wn/${arrayFinish[2][0].weather[0].icon}@2x.png`}
+            width={matches ? "55%" : "75%"}
           ></Box>
           <Box className={styles.boxTempWeather}>
-            <Box component="span">16c</Box>
-            <Box component="span">11c</Box>
+            <Box component="span">
+              {Math.round(arrayFinish[2][0].main.temp_max)}c
+            </Box>
+            <Box component="span">
+              {Math.round(arrayFinish[2][1].main.temp_max)}c
+            </Box>
           </Box>
         </Box>
         <Box
           className={`${matches ? styles.boxWeatherUpMd : styles.boxWeather}`}
         >
-          <Box component="p">Tomorrow</Box>
+          <Box component="p">{arrayFinish[3][0].dt_txt.slice(0, 11)}</Box>
           <Box
             component="img"
-            src={clear}
-            width={matches ? "55%" : "150px"}
+            src={`http://openweathermap.org/img/wn/${arrayFinish[3][0].weather[0].icon}@2x.png`}
+            width={matches ? "55%" : "75%"}
           ></Box>
           <Box className={styles.boxTempWeather}>
-            <Box component="span">16c</Box>
-            <Box component="span">11c</Box>
+            <Box component="span">
+              {Math.round(arrayFinish[3][0].main.temp_max)}c
+            </Box>
+            <Box component="span">
+              {Math.round(arrayFinish[3][1].main.temp_max)}c
+            </Box>
           </Box>
         </Box>
         <Box
           className={`${matches ? styles.boxWeatherUpMd : styles.boxWeather}`}
         >
-          <Box component="p">Tomorrow</Box>
+          <Box component="p">{arrayFinish[4][0].dt_txt.slice(0, 11)}</Box>
           <Box
             component="img"
-            src={clear}
-            width={matches ? "55%" : "150px"}
+            src={`http://openweathermap.org/img/wn/${arrayFinish[4][0].weather[0].icon}@2x.png`}
+            width={matches ? "55%" : "75%"}
           ></Box>
           <Box className={styles.boxTempWeather}>
-            <Box component="span">16c</Box>
-            <Box component="span">11c</Box>
+            <Box component="span">
+              {Math.round(arrayFinish[4][0].main.temp_max)}c
+            </Box>
+            <Box component="span">
+              {Math.round(arrayFinish[4][1].main.temp_max)}c
+            </Box>
           </Box>
         </Box>
       </Box>

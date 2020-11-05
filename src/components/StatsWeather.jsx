@@ -11,14 +11,19 @@ const useStyles = makeStyles({
   },
 });
 
-const StatsWeather = () => {
+const StatsWeather = ({ data }) => {
   const styles = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
   return (
     <Box className={matches && styles.mainupmd}>
       <FiveDaysWeather />
-      <HightlightsWeahter />
+      <HightlightsWeahter
+        windSpeed={data.wind.speed}
+        humidty={data.main.humidity}
+        visibility={data.visibility}
+        airPreassure={data.main.pressure}
+      />
     </Box>
   );
 };
