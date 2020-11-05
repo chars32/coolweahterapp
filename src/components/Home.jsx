@@ -1,5 +1,5 @@
 // React
-import React, { useState } from "react";
+import React from "react";
 // MaterialUI
 import { Box, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 // Components
