@@ -21,13 +21,13 @@ const Home = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
 
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
+  // const [latitude, setLatitude] = useState();
+  // const [longitude, setLongitude] = useState();
   // Getting latitud and longitude
-  navigator.geolocation.getCurrentPosition((position) => {
-    setLatitude(position.coords.latitude);
-    setLongitude(position.coords.longitude);
-  });
+  // navigator.geolocation.getCurrentPosition((position) => {
+  //   setLatitude(position.coords.latitude);
+  //   setLongitude(position.coords.longitude);
+  // });
 
   return (
     <Box height="100%" className={matches && styles.mainupmd}>
