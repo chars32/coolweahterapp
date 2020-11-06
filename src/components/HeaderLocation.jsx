@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-const HeaderLocation = () => {
+const HeaderLocation = ({ clickSearch }) => {
   const styles = useStyles();
   return (
     <Box
@@ -32,7 +32,11 @@ const HeaderLocation = () => {
       p={2}
       height="5%"
     >
-      <Box className={styles.buttonSearch} variant="contained">
+      <Box
+        className={styles.buttonSearch}
+        variant="contained"
+        onClick={clickSearch}
+      >
         Search for places
       </Box>
       <MyLocationIcon className={styles.buttonLocation} />
