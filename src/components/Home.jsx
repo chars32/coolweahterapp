@@ -47,6 +47,8 @@ const Home = () => {
     }
   }, [latitude, longitude]);
 
+  console.log(currentData);
+
   return (
     <Box height="100%" className={matches && styles.mainupmd}>
       {currentData && (
