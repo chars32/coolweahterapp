@@ -6,7 +6,7 @@ import { Box, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 import DailyWheater from "./DailyWheater";
 import StatsWeather from "./StatsWeather";
 // config
-// import config from "../config";
+import config from "../config";
 
 const useStyle = makeStyles({
   mainupmd: {
@@ -15,7 +15,7 @@ const useStyle = makeStyles({
 });
 
 const Home = () => {
-  console.log(process.env.OPENWEAHTER_ACCES_KEY);
+  console.log(process.env);
   //Styles
   const styles = useStyle();
   // Theme and Mediaquery
@@ -39,14 +39,11 @@ const Home = () => {
     if (latitude && longitude) {
       const dataCurrent = async () => {
         const api_call = await fetch(
-          // `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config}&units=metric`
-          "./.netlify/functions/currenForecast"
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config}&units=metric`
+          // "./.netlify/functions/currenForecast/"
         );
-        if (Response.ok) {
-          console.log("ok");
-          const dataJson = await api_call.json();
-          setCurrentData(dataJson);
-        }
+        const dataJson = await api_call.json();
+        setCurrentData(dataJson);
       };
       dataCurrent();
     }
