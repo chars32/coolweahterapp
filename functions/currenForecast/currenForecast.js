@@ -6,7 +6,7 @@ const handler = async function () {
   const appid = process.env.OPENWEAHTER_ACCES_KEY;
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${appid}`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${appid}&units=metric`,
       {
         headers: { Accept: "application/json" },
       }

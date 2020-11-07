@@ -15,7 +15,6 @@ const useStyle = makeStyles({
 });
 
 const Home = () => {
-  console.log(process.env);
   //Styles
   const styles = useStyle();
   // Theme and Mediaquery
@@ -31,19 +30,19 @@ const Home = () => {
     setLongitude(position.coords.longitude);
   });
 
-  if (latitude & longitude) {
-    console.log("si");
-  }
+  console.log(currentData);
 
   useEffect(() => {
     if (latitude && longitude) {
       const dataCurrent = async () => {
         const api_call = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config}&units=metric`
-          // "./.netlify/functions/currenForecast/"
+          // `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config}&units=metric`
+          "./.netlify/functions/currenForecast/"
         );
-        const dataJson = await api_call.json();
-        setCurrentData(dataJson);
+        if (api_call.ok) {
+          const dataJson = await api_call.json();
+          setCurrentData(dataJson);
+        }
       };
       dataCurrent();
     }
@@ -53,8 +52,12 @@ const Home = () => {
     <Box height="100%" className={matches && styles.mainupmd}>
       {currentData && (
         <>
-          <DailyWheater data={currentData} />
-          <StatsWeather data={currentData} lat={latitude} lon={longitude} />
+          <DailyWheater data={currentData.data} />
+          <StatsWeather
+            data={currentData.data}
+            lat={latitude}
+            lon={longitude}
+          />
         </>
       )}
     </Box>
