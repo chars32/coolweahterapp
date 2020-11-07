@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SearchWeather = ({ showContainer, clickSearch }) => {
-  console.log(showContainer);
   const styles = useStyles();
   return (
     <Box

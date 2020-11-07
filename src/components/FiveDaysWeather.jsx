@@ -88,7 +88,7 @@ const useStyles = makeStyles({
 const FiveDaysWeather = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
-
+  //Styles
   const styles = useStyles();
 
   return (
