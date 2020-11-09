@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const handler = async function () {
+const handler = async function (event, context) {
   try {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=villahermosa&appid=${process.env.OPENWEAHTER_ACCES_KEY}&units=metric`,

@@ -44,7 +44,7 @@ const Home = () => {
     }
   }, [latitude, longitude]);
 
-  console.log(process.env.NODE_ENV);
+  console.log(process.env);
 
   return (
     <Box height="100%" className={matches && styles.mainupmd}>
