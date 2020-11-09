@@ -6,7 +6,7 @@ import { Box, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 import DailyWheater from "./DailyWheater";
 import StatsWeather from "./StatsWeather";
 // config
-import config from "../config";
+// import config from "../config";
 
 const useStyle = makeStyles({
   mainupmd: {
@@ -17,7 +17,7 @@ const useStyle = makeStyles({
 const Home = () => {
   //Styles
   const styles = useStyle();
-  // Theme and Mediaquery
+  // Theme and Mediaquerys
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
 
