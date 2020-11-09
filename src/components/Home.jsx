@@ -33,9 +33,10 @@ const Home = () => {
   useEffect(() => {
     if (latitude && longitude) {
       const dataCurrent = async () => {
-        const api_call = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config}&units=metric`
-        );
+        // const api_call = await fetch(
+        //   `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config}&units=metric`
+        // );
+        const api_call = await fetch("./.netlify/functions/getCurrentData");
         const dataJson = await api_call.json();
         setCurrentData(dataJson);
       };
@@ -47,8 +48,12 @@ const Home = () => {
     <Box height="100%" className={matches && styles.mainupmd}>
       {currentData && (
         <>
-          <DailyWheater data={currentData} />
-          <StatsWeather data={currentData} lat={latitude} lon={longitude} />
+          <DailyWheater data={currentData.data} />
+          <StatsWeather
+            data={currentData.data}
+            lat={latitude}
+            lon={longitude}
+          />
         </>
       )}
     </Box>
