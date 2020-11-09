@@ -38,7 +38,6 @@ const Home = () => {
         );
         // const api_call = await fetch("./.netlify/functions/getCurrentData");
         const dataJson = await api_call.json();
-        console.log(process.env.OPENWEAHTER_ACCES_KEY);
         setCurrentData(dataJson);
       };
       dataCurrent();
@@ -47,12 +46,12 @@ const Home = () => {
 
   return (
     <Box height="100%" className={matches && styles.mainupmd}>
-      {/* {currentData && (
+      {currentData && (
         <>
           <DailyWheater data={currentData} />
           <StatsWeather data={currentData} lat={latitude} lon={longitude} />
         </>
-      )} */}
+      )}
     </Box>
   );
 };
