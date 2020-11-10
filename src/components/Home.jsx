@@ -34,7 +34,7 @@ const Home = () => {
     if (latitude && longitude) {
       const dataCurrent = async () => {
         const api_call = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.OPENWEAHTER_ACCES_KEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=eda9623bb098db98c4991dd3784b44a9&units=metric`
         );
         // const api_call = await fetch("./.netlify/functions/getCurrentData");
         const dataJson = await api_call.json();

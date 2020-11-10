@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const handler = async function (event, context) {
+const handler = async function (event) {
   try {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=villahermosa&appid=${process.env.OPENWEAHTER_ACCES_KEY}&units=metric`,
@@ -16,7 +16,7 @@ const handler = async function (event, context) {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ data: data }),
+      body: JSON.stringify({ data }),
     };
   } catch (error) {
     // output to netlify function log
