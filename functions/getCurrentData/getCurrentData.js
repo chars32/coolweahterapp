@@ -2,8 +2,10 @@ const fetch = require("node-fetch");
 
 const handler = async function (event) {
   try {
+    const lat = event.queryStringParameters.lat;
+    const lon = event.queryStringParameters.lon;
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=villahermosa&appid=${process.env.OPENWEAHTER_ACCES_KEY}&units=metric`,
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.OPENWEAHTER_ACCES_KEY}&units=metric`,
       {
         headers: { Accept: "application/json" },
       }

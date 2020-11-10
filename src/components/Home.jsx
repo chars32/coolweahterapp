@@ -5,8 +5,6 @@ import { Box, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 // Components
 import DailyWheater from "./DailyWheater";
 import StatsWeather from "./StatsWeather";
-// config
-// import config from "../config";
 
 const useStyle = makeStyles({
   mainupmd: {
@@ -33,10 +31,12 @@ const Home = () => {
   useEffect(() => {
     if (latitude && longitude) {
       const dataCurrent = async () => {
+        // const api_call = await fetch(
+        //   `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=eda9623bb098db98c4991dd3784b44a9&units=metric`
+        // );
         const api_call = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=eda9623bb098db98c4991dd3784b44a9&units=metric`
+          `./.netlify/functions/getCurrentData?lat=${latitude}&lon=${longitude}`
         );
-        // const api_call = await fetch("./.netlify/functions/getCurrentData");
         const dataJson = await api_call.json();
         setCurrentData(dataJson);
       };
@@ -44,14 +44,16 @@ const Home = () => {
     }
   }, [latitude, longitude]);
 
-  console.log(process.env);
-
   return (
     <Box height="100%" className={matches && styles.mainupmd}>
       {currentData && (
         <>
-          <DailyWheater data={currentData} />
-          <StatsWeather data={currentData} lat={latitude} lon={longitude} />
+          <DailyWheater data={currentData.data} />
+          <StatsWeather
+            data={currentData.data}
+            lat={latitude}
+            lon={longitude}
+          />
         </>
       )}
     </Box>
