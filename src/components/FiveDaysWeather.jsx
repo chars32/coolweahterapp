@@ -1,32 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 
-import datfivedays from "../dataDays.json";
+import FiveDaysWeatherItem from "./FiveDaysWeatherItem";
 
-const mainData = datfivedays.list; // esta data esta hardocdeada
-const arrayFinish = [];
+// new function
+const filterByDate = (dataList) => {
+  const dataListHelper = [];
+  const dataListFinalTotal = [];
+  const dataListFinalOneValue = [];
+  dataList.map((item) => dataListHelper.push(item.dt_txt.slice(0, 11)));
+  const uniqueDataListValues = [...new Set(dataListHelper)];
 
-const getDateForecast = (data) => {
-  // Variables de apoyo
-  const dataDatesForecast = [];
-
-  // Mapear para obtner valores y luego pusheamos los valores a dataDatesForecast sin que se repitan
-  data.map((item) => dataDatesForecast.push(item.dt_txt.slice(0, 11)));
-  const uniqueDates = [...new Set(dataDatesForecast)];
-
-  // Comparamos cada valor de los uniqueDates con el valor sliceado dt.txt de mainData
-  uniqueDates.forEach((c) => {
+  uniqueDataListValues.forEach((c) => {
     let helperArray = [];
-    mainData.forEach((d) => {
+    dataList.forEach((d) => {
       if (c === d.dt_txt.slice(0, 11)) {
         helperArray.push(d);
       }
     });
-    arrayFinish.push(helperArray);
+    dataListFinalTotal.push(helperArray);
   });
+  dataListFinalTotal.forEach((oneArray) => {
+    dataListFinalOneValue.push(oneArray[0]);
+  });
+  return dataListFinalOneValue;
 };
-
-getDateForecast(mainData);
 
 const useStyles = makeStyles({
   main: {
@@ -44,22 +42,6 @@ const useStyles = makeStyles({
     height: "80%",
     width: "70%",
   },
-  boxWeather: {
-    backgroundColor: "#1E213A",
-    display: "flex",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    width: "45%",
-    margin: "10px 0",
-    color: "#E7E7EB",
-    flexDirection: "column",
-    height: "33%",
-  },
-  boxTempWeather: {
-    display: "flex",
-    justifyContent: "space-evenly",
-    width: "80%",
-  },
   //mediaquery
   mainupmd: {
     height: "30%",
@@ -72,24 +54,28 @@ const useStyles = makeStyles({
     padding: "0 24px",
     width: "80%",
   },
-  boxWeatherUpMd: {
-    backgroundColor: "#1E213A",
-    display: "flex",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    width: "17%",
-    color: "#E7E7EB",
-    flexDirection: "column",
-    height: "85%",
-    borderRadius: "10px",
-  },
 });
 
-const FiveDaysWeather = () => {
+const FiveDaysWeather = ({ lat, lon }) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
   //Styles
   const styles = useStyles();
+
+  const [fivedays, setFivedays] = useState();
+
+  useEffect(() => {
+    if (lat && lon) {
+      const fivedaysCurrent = async () => {
+        const api_call = await fetch(
+          `./.netlify/functions/getFivedays?lat=${lat}&lon=${lon}`
+        );
+        const dataJson = await api_call.json();
+        setFivedays(filterByDate(dataJson.data.list));
+      };
+      fivedaysCurrent();
+    }
+  }, [lat, lon]);
 
   return (
     <Box className={`${styles.main} ${matches && styles.mainupmd}`}>
@@ -98,96 +84,15 @@ const FiveDaysWeather = () => {
           matches ? styles.boxWeatherMainUpMd : styles.boxWeatherMain
         }`}
       >
-        <Box
-          className={`${matches ? styles.boxWeatherUpMd : styles.boxWeather}`}
-        >
-          <Box component="p">Tomorrow</Box>
-          <Box
-            component="img"
-            src={`http://openweathermap.org/img/wn/${arrayFinish[0][0].weather[0].icon}@2x.png`}
-            width={matches ? "55%" : "75%"}
-          ></Box>
-          <Box className={styles.boxTempWeather}>
-            <Box component="span">
-              {Math.round(arrayFinish[0][0].main.temp_max)}c
-            </Box>
-            <Box component="span">
-              {Math.round(arrayFinish[0][1].main.temp_max)}c
-            </Box>
-          </Box>
-        </Box>
-        <Box
-          className={`${matches ? styles.boxWeatherUpMd : styles.boxWeather}`}
-        >
-          <Box component="p">{arrayFinish[1][0].dt_txt.slice(0, 11)}</Box>
-          <Box
-            component="img"
-            src={`http://openweathermap.org/img/wn/${arrayFinish[1][0].weather[0].icon}@2x.png`}
-            width={matches ? "55%" : "75%"}
-          ></Box>
-          <Box className={styles.boxTempWeather}>
-            <Box component="span">
-              {Math.round(arrayFinish[1][0].main.temp_max)}c
-            </Box>
-            <Box component="span">
-              {Math.round(arrayFinish[1][1].main.temp_max)}c
-            </Box>
-          </Box>
-        </Box>
-        <Box
-          className={`${matches ? styles.boxWeatherUpMd : styles.boxWeather}`}
-        >
-          <Box component="p">{arrayFinish[2][0].dt_txt.slice(0, 11)}</Box>
-          <Box
-            component="img"
-            src={`http://openweathermap.org/img/wn/${arrayFinish[2][0].weather[0].icon}@2x.png`}
-            width={matches ? "55%" : "75%"}
-          ></Box>
-          <Box className={styles.boxTempWeather}>
-            <Box component="span">
-              {Math.round(arrayFinish[2][0].main.temp_max)}c
-            </Box>
-            <Box component="span">
-              {Math.round(arrayFinish[2][1].main.temp_max)}c
-            </Box>
-          </Box>
-        </Box>
-        <Box
-          className={`${matches ? styles.boxWeatherUpMd : styles.boxWeather}`}
-        >
-          <Box component="p">{arrayFinish[3][0].dt_txt.slice(0, 11)}</Box>
-          <Box
-            component="img"
-            src={`http://openweathermap.org/img/wn/${arrayFinish[3][0].weather[0].icon}@2x.png`}
-            width={matches ? "55%" : "75%"}
-          ></Box>
-          <Box className={styles.boxTempWeather}>
-            <Box component="span">
-              {Math.round(arrayFinish[3][0].main.temp_max)}c
-            </Box>
-            <Box component="span">
-              {Math.round(arrayFinish[3][1].main.temp_max)}c
-            </Box>
-          </Box>
-        </Box>
-        <Box
-          className={`${matches ? styles.boxWeatherUpMd : styles.boxWeather}`}
-        >
-          <Box component="p">{arrayFinish[4][0].dt_txt.slice(0, 11)}</Box>
-          <Box
-            component="img"
-            src={`http://openweathermap.org/img/wn/${arrayFinish[4][0].weather[0].icon}@2x.png`}
-            width={matches ? "55%" : "75%"}
-          ></Box>
-          <Box className={styles.boxTempWeather}>
-            <Box component="span">
-              {Math.round(arrayFinish[4][0].main.temp_max)}c
-            </Box>
-            <Box component="span">
-              {Math.round(arrayFinish[4][1].main.temp_max)}c
-            </Box>
-          </Box>
-        </Box>
+        {fivedays &&
+          fivedays.map((day) => (
+            <FiveDaysWeatherItem
+              date={day.dt_txt.slice(0, 11)}
+              img={day.weather[0].icon}
+              temp_max={day.main.temp_max}
+              temp_min={day.main.temp_min}
+            />
+          ))}
       </Box>
     </Box>
   );
